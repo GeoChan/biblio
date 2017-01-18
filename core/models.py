@@ -5,7 +5,7 @@ ESCALAS = (
     ('2', 'En desacuerdo'),
     ('3', 'Ni acuerdo ni desacuerdo'),
     ('4', 'De acuerdo'),
-    ('5', 'Totalmente de acuerdo'),
+    ('5', 'Totalmente de acuerdo')
 )
 
 
@@ -34,7 +34,7 @@ class Pregunta(models.Model):
 
 class Periodo(models.Model):
     descripcion = models.CharField(max_length=128)
-    fechaIncio = models.DateField()
+    fechaInicio = models.DateField()
     fechaFin = models.DateField()
 
     def __str__(self):
@@ -84,4 +84,4 @@ class Prestamo(models.Model):
     persona = models.ForeignKey(Persona)
 
     def __str__(self):
-        return '%s, %s, %s' % (self.libro, self.persona, self.periodo,)
+        return '%s, %s, %s' % (self.libro, self.persona, self.periodo)
