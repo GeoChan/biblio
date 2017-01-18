@@ -26,7 +26,7 @@ class Encuesta(models.Model):
 
 class Pregunta(models.Model):
     enunciado = models.CharField(max_length=128)
-    pregunta = models.ForeignKey(Encuesta, related_name='preguntas')
+    encuesta = models.ForeignKey(Encuesta, related_name='preguntas')
 
     def __str__(self):
         return self.enunciado

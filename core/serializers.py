@@ -5,13 +5,13 @@ from . import models
 class PersonaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Persona
-        fields = ('url', 'codigo', 'email',)
+        fields = ('url', 'codigo', 'email')
 
 
 class PreguntaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Encuesta
-        fields = ('url', 'enunciado', 'pregunta',)
+        fields = ('url', 'enunciado', 'encuesta')
 
 
 class EncuestaSerializer(serializers.ModelSerializer):
@@ -20,37 +20,37 @@ class EncuestaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Encuesta
-        fields = ('url', 'descripcion', 'preguntas',)
+        fields = ('url', 'descripcion', 'preguntas')
 
 
 class PeriodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Periodo
-        fields = ('url', 'descripcon', 'fechaInicio', 'fechaFin',)
+        fields = ('url', 'descripcon', 'fechaInicio', 'fechaFin')
 
 
 class RegistroSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Registro
-        fields = ('url', 'pregunta', 'codigo', 'periodo', 'escala',)
+        fields = ('url', 'pregunta', 'codigo', 'periodo', 'escala')
 
 
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Categoria
-        fields = ('url', 'nombre',)
+        fields = ('url', 'nombre')
 
 
 class LibroSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Libro
-        fields = ('url', 'libro', 'nombre', 'categoria',)
+        fields = ('url', 'libro', 'nombre', 'categoria')
 
 
 class BusquedaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Busqueda
-        fields = ('url', 'libro', 'periodo',)
+        fields = ('url', 'libro', 'periodo')
 
 
 class PrestamoSerializer(serializers.ModelSerializer):
