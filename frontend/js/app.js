@@ -1,4 +1,6 @@
 (function () {
     angular
-        .module('biblio', []);
+        .module('biblio', [
+            'ngMaterial'
+        ]);
 })();

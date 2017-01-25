@@ -1,12 +1,19 @@
-from django.shortcuts import render
 from . import models, serializers
 from rest_framework import viewsets
 from django.shortcuts import redirect
+from rest_framework.pagination import PageNumberPagination
+
+
+class PaginationControl(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'size'
+    max_page_size = 1000
 
 
 class PersonaViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.PersonaSerializer
     queryset = models.Persona.objects.all()
+    pagination_class = PaginationControl
 
 
 class EncuestaViewSet(viewsets.ModelViewSet):
