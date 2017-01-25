@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Biblioteca</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/router/routers.js"></script>
+    <script src="js/controllers/prueba.controller.js"></script>
 </head>
 <body ng-app="biblio" ng-controller="prueba as vm">
-{{ vm.hola }}
-<script src="node_modules/angular/angular.js"></script>
-<script src="js/app.js"></script>
-<script src="js/controllers/prueba.controller.js"></script>
+<a ui-sref="quiz" ui-sref-active="active">quiz</a>
+<a ui-sref="books" ui-sref-active="active">books</a>
+
+<ui-view></ui-view>
+
 </body>
 </html>
