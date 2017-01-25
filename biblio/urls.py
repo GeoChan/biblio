@@ -15,21 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from rest_framework import routers
-from core import views
-
-router = routers.DefaultRouter()
-router.register(r'personas', views.PersonaViewSet)
-router.register(r'encuesta', views.EncuestaViewSet)
-router.register(r'pregunta', views.PreguntaViewSet)
-router.register(r'periodo', views.PeriodoViewSet)
-router.register(r'registro', views.RegistroViewSet)
-router.register(r'categoria', views.CategoriaViewSet)
-router.register(r'libro', views.LibroViewSet)
-router.register(r'Busqueda', views.BusquedaViewSet)
-router.register(r'prestamo', views.PrestamoViewSet)
+from core.views import home
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include(router.urls))
+    url(r'^api/', include('core.urls')),
+    #url(r'^', home),
+    url(r'^login$', auth_views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^logout$', auth_views.logout, {'template_name': 'logout.html'}, name='logout'),
 ]
