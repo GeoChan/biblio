@@ -1,4 +1,7 @@
 (function () {
     angular
-        .module('biblio', ['ui.router', 'ngMaterial']);
+        .module('biblio', [
+            'ui.router',
+            'ngMaterial'
+        ]);
 })();
