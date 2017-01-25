@@ -82,6 +82,6 @@ class Prestamo(models.Model):
     libro = models.ForeignKey(Libro)
     periodo = models.ForeignKey(Periodo)
     persona = models.ForeignKey(Persona)
-
     def __str__(self):
-        return '%s, %s, %s' % (self.libro, self.persona, self.periodo)
+        return '%s, %s, %s'%(self.libro,self.persona, self.periodo,)
+    
