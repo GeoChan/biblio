@@ -23,6 +23,7 @@ class EncuestaSerializer(serializers.ModelSerializer):
 
 
 class PeriodoSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Periodo
         fields = ('url', 'descripcion', 'fechaInicio', 'fechaFin')
