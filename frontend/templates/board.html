@@ -23,7 +23,7 @@
                         {{ section.expand ? 'arrow_drop_up' : 'arrow_drop_down'}}</md-icon>
                 </md-list-item>
                 <md-list-item ng-show="section.expand" ng-repeat="action in section.actions"
-                              ng-click="vm.toast(action.link)">
+                              ng-click="vm.goto(action.link)">
                     <md-icon>{{ action.icon }}</md-icon>
                     <p class="md-body-2">{{ action.name }}</p>
                     <span flex></span>

@@ -3,12 +3,15 @@
         .module('biblio')
         .controller('BoardController', BoardController);
 
-    BoardController.$inject = ['$mdSidenav', '$mdToast'];
+    BoardController.$inject = ['$mdSidenav', '$mdToast', '$state'];
 
-    function BoardController($mdSidenav, $mdToast) {
+    function BoardController($mdSidenav, $mdToast, $state) {
         var vm = this;
         vm.toggleSidenav = function (menu) {
             $mdSidenav(menu).toggle();
+        };
+        vm.goto= function (link) {
+            $state.go(link);
         };
         vm.toast = function (message) {
             var toast = $mdToast.simple().content('You clicked ' + message).position('bottom right');
@@ -66,11 +69,11 @@
                     actions: [{
                         name: 'Action 1',
                         icon: 'settings',
-                        link: 'Action 1'
+                        link: 'books'
                     }, {
                         name: 'Action 2',
                         icon: 'settings',
-                        link: 'Action 2'
+                        link: 'quiz'
                     }]
                 }, {
                     name: 'Section 2',
