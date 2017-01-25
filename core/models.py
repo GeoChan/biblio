@@ -1,11 +1,9 @@
 from django.db import models
 
 ESCALAS = (
-    ('1', 'Totalmente en desacuerdo'),
-    ('2', 'En desacuerdo'),
-    ('3', 'Ni acuerdo ni desacuerdo'),
-    ('4', 'De acuerdo'),
-    ('5', 'Totalmente de acuerdo')
+    ('1', 'Si'),
+    ('2', 'No'),
+
 )
 
 
