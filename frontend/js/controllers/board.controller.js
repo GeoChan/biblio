@@ -69,15 +69,15 @@
                     actions: [{
                         name: 'Persona',
                         icon: 'person',
-                        link: 'books'
+                        link: 'persona'
                     }, {
                         name: 'Encuesta',
                         icon: 'description',
-                        link: 'quiz'
+                        link: 'encuesta'
                     }, {
                         name: 'Periodo',
                         icon: 'schedule',
-                        link: 'quiz'
+                        link: 'periodo'
                     }]
                 }, {
                     name: 'Encuesta',

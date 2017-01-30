@@ -1,0 +1,90 @@
+<biblio-wrapper title="Administración" to-excel="#tabla">
+
+    <md-toolbar class="md-table-toolbar md-default" ng-hide="vm.crudSelected.length">
+        <div class="md-toolbar-tools">
+            <h2 class="md-title">Periodo</h2>
+            <div flex></div>
+            <md-button class="md-fab md-primary md-mini">
+                <md-icon>insert_drive_file</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <div layout="column" flex>
+        <!-- exact table from live demo -->
+        <md-table-container>
+            <table md-table>
+                <thead md-head md-order="vm.crudOrder" md-on-reorder="vm.getCrudData">
+                <tr md-row>
+                    <th md-column>Descripción</th>
+                    <th md-column>Desde</th>
+                    <th md-column>Hasta</th>
+                    <th md-column>Opciones</th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row ng-repeat="data in vm.crudData">
+                    <td md-cell>{{ data.descripcion }}</td>
+                    <td md-cell>{{ data.fechaInicio }}</td>
+                    <td md-cell>{{ data.fechaFin }}</td>
+                    <td md-cell width="110">
+                        <md-button class="md-icon-button md-primary">
+                            <md-icon>edit</md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button md-warn">
+                            <md-icon>delete</md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+
+        <md-table-pagination md-limit="vm.crudLimit"
+                             md-limit-options="[5, 10, 15]"
+                             md-page="vm.crudPage"
+                             md-total="{{ vm.crudTotal }}"
+                             md-on-paginate="vm.getCrudData"
+                             md-page-select>
+        </md-table-pagination>
+    </div>
+</biblio-wrapper>
+
+<script type="text/ng-template" id="/remuneraciones/form-unidad-operativa.html">
+
+    <md-dialog aria-label="Registro Unidad Operativa" flex>
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Registro Unidad Operativa</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="form.cancel()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <unap-form-unidad-operativa
+                    model-data="form.data"
+                    on-reset="form.reset()"
+                    on-create="form.perform()"
+                    on-update="form.perform()"
+                    on-cancel="form.cancel()"
+                    form-data="form.formData"
+                    server-messages="form.serverError">
+            </unap-form-unidad-operativa>
+
+        </md-dialog-content>
+
+        <md-dialog-actions style="border-top: 1px solid lightgrey">
+            <unap-buttons-form
+                    form-data="form.formData"
+                    show-cancel="false"
+                    flex>
+            </unap-buttons-form>
+        </md-dialog-actions>
+
+    </md-dialog>
+
+</script>
