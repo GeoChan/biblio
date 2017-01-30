@@ -2,6 +2,7 @@
     angular
         .module('biblio', [
             'ui.router',
-            'ngMaterial'
+            'ngMaterial',
+            'md.data.table'
         ]);
 })();

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from core.models import Persona, Periodo, Busqueda, Categoria, Registro, Encuesta, Libro, Prestamo, Pregunta
+from django.contrib.auth.models import User
 
 
 class PersonaSerializer(serializers.ModelSerializer):
@@ -23,7 +24,6 @@ class EncuestaSerializer(serializers.ModelSerializer):
 
 
 class PeriodoSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Periodo
         fields = ('url', 'descripcion', 'fechaInicio', 'fechaFin')
@@ -54,6 +54,13 @@ class BusquedaSerializer(serializers.ModelSerializer):
 
 
 class PrestamoSerializer(serializers.ModelSerializer):
-    class Metal:
+    class Meta:
         model = Prestamo
         fields = ('url', 'libro', 'periodo', 'persona')
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('url', 'username', 'email', 'first_name', 'last_name')
+
