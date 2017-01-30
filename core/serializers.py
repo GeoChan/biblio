@@ -62,5 +62,5 @@ class PrestamoSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'first_name', 'second_name')
+        fields = ('url', 'username', 'email', 'first_name', 'last_name')
 

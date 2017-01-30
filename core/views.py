@@ -64,6 +64,11 @@ class UserViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
+    def dispatch(self, request, *args, **kwargs):
+        if kwargs.get('pk') == 'current' and request.user:
+            kwargs['pk'] = request.user.pk
+        return super(UserViewSet, self).dispatch(request, *args, **kwargs)
+
 
 def home(request):
     if request.user.is_authenticated:
