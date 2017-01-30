@@ -9,5 +9,6 @@ md-whiteframe {
 
 #content {
   padding: 5px;
+  overflow: auto;
 }
 

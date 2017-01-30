@@ -5,7 +5,7 @@
             var quiz = {
                 name: 'quiz',
                 url: '/quiz',
-                template: '<biblio-wrapper title="pansoncito"><h2>el gordis me la come</h2></biblio-wrapper>'
+                template: '<crud-persona></crud-persona>'
             };
             var books = {
                 name: 'books',

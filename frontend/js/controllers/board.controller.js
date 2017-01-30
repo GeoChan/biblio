@@ -10,7 +10,7 @@
         vm.toggleSidenav = function (menu) {
             $mdSidenav(menu).toggle();
         };
-        vm.goto= function (link) {
+        vm.goto = function (link) {
             $state.go(link);
         };
         vm.toast = function (message) {
@@ -28,10 +28,10 @@
             else list.push(item);
         };
         vm.data = {
-            title: 'Dashboard',
+            title: 'Biblioteca',
             user: {
-                name: 'Angular Ninja',
-                email: 'angular@ninja.com',
+                name: 'Usuario Biblioteca',
+                email: 'admin@biblio.com',
                 icon: 'face'
             },
             toolbar: {
@@ -64,40 +64,40 @@
             },
             sidenav: {
                 sections: [{
-                    name: 'Section 1',
+                    name: 'Administracion',
                     expand: true,
                     actions: [{
-                        name: 'Action 1',
-                        icon: 'settings',
+                        name: 'Persona',
+                        icon: 'person',
                         link: 'books'
                     }, {
-                        name: 'Action 2',
-                        icon: 'settings',
+                        name: 'Encuesta',
+                        icon: 'description',
+                        link: 'quiz'
+                    }, {
+                        name: 'Periodo',
+                        icon: 'schedule',
                         link: 'quiz'
                     }]
                 }, {
-                    name: 'Section 2',
+                    name: 'Encuesta',
                     expand: false,
                     actions: [{
-                        name: 'Action 3',
-                        icon: 'settings',
+                        name: 'Encuestas',
+                        icon: 'playlist_add_check',
                         link: 'Action 3'
                     }]
                 }, {
-                    name: 'Section 3',
+                    name: 'Reportes',
                     expand: false,
                     actions: [{
-                        name: 'Action 4',
-                        icon: 'settings',
+                        name: 'Encuestados',
+                        icon: 'trending_up',
                         link: 'Action 4'
                     }, {
-                        name: 'Action 5',
-                        icon: 'settings',
+                        name: 'Resultados',
+                        icon: 'pie_chart',
                         link: 'Action 5'
-                    }, {
-                        name: 'Action 6',
-                        icon: 'settings',
-                        link: 'Action 6'
                     }]
                 }]
             },
@@ -135,5 +135,5 @@
 })();
 
 /*angular.module('App').config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default').primaryPalette('indigo');
-})*/
+ $mdThemingProvider.theme('default').primaryPalette('indigo');
+ })*/
