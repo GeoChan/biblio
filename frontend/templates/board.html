@@ -1,5 +1,5 @@
 <div layout="row" layout-fill ng-cloak>
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" role="sidenav" md-component-id="left"
+    <md-sidenav class="md-sidenav-left md-whiteframe-z3" role="sidenav" md-component-id="left"
                 md-is-locked-open="$mdMedia('gt-md')">
         <md-toolbar class="md-tall md-hue-2" layout-align="end end">
             <div class="md-toolbar-tools" layout layout-padding>
@@ -20,7 +20,7 @@
                     <p class="md-subheader md-primary">{{ section.name }}</p>
                     <span flex></span>
                     <md-icon class="md-primary md-icon-button">
-                        {{ section.expand ? 'arrow_drop_up' : 'arrow_drop_down'}}</md-icon>
+                        {{ section.expand ? 'arrow_drop_up' : 'arrow_drop_down' }}</md-icon>
                 </md-list-item>
                 <md-list-item ng-show="section.expand" ng-repeat="action in section.actions"
                               ng-click="vm.goto(action.link)">
@@ -33,7 +33,7 @@
     </md-sidenav>
     <section layout="column" role="main" flex>
         <md-toolbar role="toolbar">
-            <div class="md-toolbar-tools">
+            <div class="md-toolbar-tools md-whiteframe-z2">
                 <md-button class="md-icon-button" ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
                     <md-icon>menu</md-icon>
                 </md-button>
@@ -51,8 +51,8 @@
                         <md-subheader>{{ menu.name }}</md-subheader>
                         <md-menu-item ng-repeat="action in menu.actions">
                             <md-button layout-fill md-ink-ripple ng-click="vm.toast(action.message)">
-                                <md-icon md-class="{{ action.error ? 'md-warn' : 'md-primary'}}" md-menu-align-target>
-                                    {{ action.completed ? 'done' : 'hourglass_empty'}}</md-icon>
+                                <md-icon md-class="{{ action.error ? 'md-warn' : 'md-primary' }}" md-menu-align-target>
+                                    {{ action.completed ? 'done' : 'hourglass_empty' }}</md-icon>
                                 {{ action.name }}
                             </md-button>
                         </md-menu-item>
