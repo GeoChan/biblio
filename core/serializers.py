@@ -3,63 +3,69 @@ from core.models import Persona, Periodo, Busqueda, Categoria, Registro, Encuest
 from django.contrib.auth.models import User
 
 
-class PersonaSerializer(serializers.ModelSerializer):
+class PersonaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Persona
         fields = ('url', 'codigo', 'email')
 
 
-class PreguntaSerializer(serializers.ModelSerializer):
+class PreguntaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Pregunta
         fields = ('url', 'enunciado', 'encuesta')
 
 
-class EncuestaSerializer(serializers.ModelSerializer):
-    preguntas = PreguntaSerializer(many=True, read_only=True)
+class PreguntaRelatedSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Pregunta
+        fields = ('url', 'enunciado')
+
+
+class EncuestaSerializer(serializers.HyperlinkedModelSerializer):
+    preguntas = PreguntaRelatedSerializer(many=True, read_only=True)
 
     class Meta:
         model = Encuesta
         fields = ('url', 'descripcion', 'preguntas')
 
 
-class PeriodoSerializer(serializers.ModelSerializer):
+class PeriodoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Periodo
         fields = ('url', 'descripcion', 'fechaInicio', 'fechaFin')
 
 
-class RegistroSerializer(serializers.ModelSerializer):
+class RegistroSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Registro
         fields = ('url', 'pregunta', 'codigo', 'periodo', 'escala')
 
 
-class CategoriaSerializer(serializers.ModelSerializer):
+class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Categoria
         fields = ('url', 'nombre')
 
 
-class LibroSerializer(serializers.ModelSerializer):
+class LibroSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Libro
         fields = ('url', 'libro', 'nombre', 'categoria')
 
 
-class BusquedaSerializer(serializers.ModelSerializer):
+class BusquedaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Busqueda
         fields = ('url', 'libro', 'periodo')
 
 
-class PrestamoSerializer(serializers.ModelSerializer):
+class PrestamoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Prestamo
         fields = ('url', 'libro', 'periodo', 'persona')
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('url', 'username', 'email', 'first_name', 'last_name')
