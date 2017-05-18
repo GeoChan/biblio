@@ -13,7 +13,7 @@ router.register(r'periodo', PeriodoViewSet)
 router.register(r'registro', RegistroViewSet)
 router.register(r'categoria', CategoriaViewSet)
 router.register(r'libro', LibroViewSet)
-router.register(r'Busqueda', BusquedaViewSet)
+router.register(r'busqueda', BusquedaViewSet)
 router.register(r'prestamo', PrestamoViewSet)
 router.register(r'user', UserViewSet)
 

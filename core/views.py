@@ -4,25 +4,17 @@ from core.serializers import PeriodoSerializer, PersonaSerializer, EncuestaSeria
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
-from rest_framework.pagination import PageNumberPagination
 from rest_framework import mixins
-
-
-class PaginationControl(PageNumberPagination):
-    page_size = 10
-    page_size_query_param = 'size'
-    max_page_size = 1000
 
 
 class PersonaViewSet(viewsets.ModelViewSet):
     serializer_class = PersonaSerializer
     queryset = Persona.objects.all()
-    pagination_class = PaginationControl
 
 
 class EncuestaViewSet(viewsets.ModelViewSet):
     serializer_class = EncuestaSerializer
-    queryset = Encuesta.objects.all()
+    queryset = Encuesta.objects.all().prefetch_related('preguntas')
 
 
 class PreguntaViewSet(viewsets.ModelViewSet):
