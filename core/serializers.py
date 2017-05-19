@@ -34,6 +34,10 @@ class PeriodoSerializer(serializers.HyperlinkedModelSerializer):
         model = Periodo
         fields = ('url', 'descripcion', 'fecha_inicio', 'fecha_fin')
 
+    def validate(self, attrs):
+        Periodo(**attrs).clean()
+        return attrs
+
 
 class RegistroSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
