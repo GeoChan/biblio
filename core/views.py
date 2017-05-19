@@ -26,6 +26,11 @@ class PeriodoViewSet(viewsets.ModelViewSet):
     serializer_class = PeriodoSerializer
     queryset = Periodo.objects.all()
 
+    def dispatch(self, request, *args, **kwargs):
+        if kwargs.get('pk') == 'current':
+            kwargs['pk'] = Periodo.activo()
+        return super(PeriodoViewSet, self).dispatch(request, *args, **kwargs)
+
 
 class RegistroViewSet(viewsets.ModelViewSet):
     serializer_class = RegistroSerializer

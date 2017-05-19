@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+from django.core.exceptions import ValidationError
 
 ESCALAS = (
     ('1', 'Si'),
@@ -31,11 +33,22 @@ class Pregunta(models.Model):
 
 class Periodo(models.Model):
     descripcion = models.CharField(max_length=128)
-    fechaInicio = models.DateField()
-    fechaFin = models.DateField()
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
 
     def __str__(self):
         return self.descripcion
+
+    def clean(self):
+        if self.fecha_inicio > self.fecha_fin:
+            raise ValidationError('La fecha de inicio debe ser menor que la fecha final.')
+
+    @staticmethod
+    def activo():
+        periodo = Periodo.objects.filter(fecha_inicio__lte=timezone.now(), fecha_fin__gte=timezone.now()).first()
+        if periodo is None:
+            return -1
+        return periodo.id
 
 
 class Registro(models.Model):

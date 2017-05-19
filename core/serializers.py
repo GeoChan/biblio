@@ -32,7 +32,7 @@ class EncuestaSerializer(serializers.HyperlinkedModelSerializer):
 class PeriodoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Periodo
-        fields = ('url', 'descripcion', 'fechaInicio', 'fechaFin')
+        fields = ('url', 'descripcion', 'fecha_inicio', 'fecha_fin')
 
 
 class RegistroSerializer(serializers.HyperlinkedModelSerializer):
