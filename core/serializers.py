@@ -7,7 +7,7 @@ from rest_framework.exceptions import ValidationError
 class PersonaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Persona
-        fields = ('url', 'codigo', 'email')
+        fields = ('url', 'codigo', 'email', 'completado')
 
 
 class PreguntaSerializer(serializers.HyperlinkedModelSerializer):
@@ -27,7 +27,7 @@ class EncuestaSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Encuesta
-        fields = ('url', 'descripcion', 'preguntas')
+        fields = ('url', 'descripcion', 'cobertura', 'preguntas')
 
 
 class PeriodoSerializer(serializers.HyperlinkedModelSerializer):
@@ -47,7 +47,7 @@ class PeriodoSerializer(serializers.HyperlinkedModelSerializer):
 class RegistroSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Registro
-        fields = ('url', 'pregunta', 'codigo', 'periodo', 'escala')
+        fields = ('url', 'pregunta', 'persona', 'periodo', 'escala')
 
 
 class CategoriaSerializer(serializers.HyperlinkedModelSerializer):

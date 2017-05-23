@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
-from django.db.models import Q
+
+# from django.db.models import Q
 
 ESCALAS = (
     ('1', 'Si'),
@@ -17,12 +18,31 @@ class Persona(models.Model):
     def __str__(self):
         return self.codigo
 
+    @property
+    def completado(self):
+        periodo = Periodo.activo()
+        if periodo is None:
+            return 'no hay encueesta activa'
+        registros = Registro.objects.filter(periodo=periodo, persona=self)
+        preguntas_contestadas = registros.count()
+        if preguntas_contestadas == 0:
+            return 0.00
+        total_preguntas = registros.get().pregunta.encuesta.preguntas.count()
+        return preguntas_contestadas / total_preguntas * 100
+
 
 class Encuesta(models.Model):
     descripcion = models.CharField(max_length=128)
 
     def __str__(self):
         return self.descripcion
+
+    @property
+    def cobertura(self):
+        total_preguntas = Persona.objects.count() * self.preguntas.count()
+        #return total_preguntas
+        total_respuestas = Registro.objects.filter(pregunta__in=self.preguntas)
+        return total_preguntas / total_respuestas * 100
 
 
 class Pregunta(models.Model):
@@ -63,7 +83,7 @@ class Registro(models.Model):
     escala = models.CharField(max_length=128, choices=ESCALAS)
 
     def __str__(self):
-        return "%d - %s: %s = $s" % (self.periodo, self.persona, self.pregunta, self.escala)
+        return "%s - %s: %s = %s" % (self.periodo, self.persona, self.pregunta, self.escala)
 
     class Meta:
         unique_together = ('pregunta', 'persona', 'periodo')

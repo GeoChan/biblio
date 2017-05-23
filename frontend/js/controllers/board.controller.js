@@ -64,7 +64,7 @@
             },
             sidenav: {
                 sections: [{
-                    name: 'Administracion',
+                    name: 'Panel de Control',
                     expand: true,
                     actions: [{
                         name: 'Persona',
@@ -78,14 +78,6 @@
                         name: 'Periodo',
                         icon: 'schedule',
                         link: 'periodo'
-                    }]
-                }, {
-                    name: 'Encuesta',
-                    expand: false,
-                    actions: [{
-                        name: 'Encuestas',
-                        icon: 'playlist_add_check',
-                        link: 'Action 3'
                     }]
                 }, {
                     name: 'Reportes',
@@ -133,7 +125,3 @@
         }
     }
 })();
-
-/*angular.module('App').config(function ($mdThemingProvider) {
- $mdThemingProvider.theme('default').primaryPalette('indigo');
- })*/

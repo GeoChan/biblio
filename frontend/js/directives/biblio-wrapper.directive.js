@@ -13,10 +13,10 @@
                 '<md-toolbar class="md-table-toolbar-tools">' +
                     '<div class="md-toolbar-tools">' +
                         '<span>{{ vm.title }}</span>' +
-                        '<div flex></div>' +
-                        '<md-button class="md-icon-button">' +
-                            '<md-icon md-font-library="material-icon">more_vert</md-icon>' +
-                        '</md-button>' +
+                        //'<div flex></div>' +
+                        //'<md-button class="md-icon-button">' +
+                        //    '<md-icon md-font-library="material-icon">more_vert</md-icon>' +
+                        //'</md-button>' +
                     '</div>' +
                 '</md-toolbar>' +
                 '<md-content ng-transclude></md-content>' +

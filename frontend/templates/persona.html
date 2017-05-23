@@ -1,12 +1,8 @@
-<biblio-wrapper title="Administración" to-excel="#tabla">
+<biblio-wrapper title="Panel de Control" to-excel="#tabla">
 
     <md-toolbar class="md-table-toolbar md-default" ng-hide="vm.crudSelected.length">
         <div class="md-toolbar-tools">
             <h2 class="md-title">Persona</h2>
-            <div flex></div>
-            <md-button class="md-fab md-primary md-mini">
-                <md-icon>insert_drive_file</md-icon>
-            </md-button>
         </div>
     </md-toolbar>
 
@@ -18,21 +14,14 @@
                 <tr md-row>
                     <th md-column>Código</th>
                     <th md-column>Email</th>
-                    <th md-column>Opciones</th>
+                    <th md-column>Completado</th>
                 </tr>
                 </thead>
                 <tbody md-body>
                 <tr md-row ng-repeat="data in vm.crudData">
                     <td md-cell>{{ data.codigo }}</td>
                     <td md-cell>{{ data.email }}</td>
-                    <td md-cell width="110">
-                        <md-button class="md-icon-button md-primary">
-                            <md-icon>edit</md-icon>
-                        </md-button>
-                        <md-button class="md-icon-button md-warn">
-                            <md-icon>delete</md-icon>
-                        </md-button>
-                    </td>
+                    <td md-cell width="100"><b>{{ data.completado | number:2 }}%</b></td>
                 </tr>
                 </tbody>
             </table>
