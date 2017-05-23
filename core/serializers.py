@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from core.models import Persona, Periodo, Busqueda, Categoria, Registro, Encuesta, Libro, Prestamo, Pregunta
 from django.contrib.auth.models import User
+from rest_framework.exceptions import ValidationError
 
 
 class PersonaSerializer(serializers.HyperlinkedModelSerializer):
@@ -35,7 +36,11 @@ class PeriodoSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'descripcion', 'fecha_inicio', 'fecha_fin')
 
     def validate(self, attrs):
-        Periodo(**attrs).clean()
+        if attrs['fecha_inicio'] > attrs['fecha_fin']:
+            raise ValidationError({
+                'fecha_inicio': 'debe ser menor o igual que la fecha final',
+                'fecha_fin': 'debe ser mayor o igual de la fecha inicial'
+            })
         return attrs
 
 

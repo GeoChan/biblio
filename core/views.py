@@ -28,7 +28,8 @@ class PeriodoViewSet(viewsets.ModelViewSet):
 
     def dispatch(self, request, *args, **kwargs):
         if kwargs.get('pk') == 'current':
-            kwargs['pk'] = Periodo.activo()
+            periodo = Periodo.activo()
+            kwargs['pk'] = -1 if periodo is None else periodo.id
         return super(PeriodoViewSet, self).dispatch(request, *args, **kwargs)
 
 
