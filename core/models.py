@@ -20,19 +20,20 @@ class Persona(models.Model):
 
     @property
     def completado(self):
-        periodo = Periodo.activo()
+        periodo = Periodo.get_activo()
         if periodo is None:
             return 'no hay encueesta activa'
-        registros = Registro.objects.filter(periodo=periodo, persona=self)
-        preguntas_contestadas = registros.count()
-        if preguntas_contestadas == 0:
-            return 0.00
-        total_preguntas = registros.get().pregunta.encuesta.preguntas.count()
-        return preguntas_contestadas / total_preguntas * 100
+        preguntas = periodo.encuestas.get().preguntas
+        preguntas_contestadas = Registro.objects.filter(pregunta__in=list(preguntas.all()), persona=self).count()
+        total_preguntas = preguntas.count()
+        if total_preguntas == 0:
+            return 100.0
+        return preguntas_contestadas / total_preguntas * 100.0
 
 
 class Encuesta(models.Model):
     descripcion = models.CharField(max_length=128)
+    periodos = models.ManyToManyField('Periodo', related_name='encuestas')
 
     def __str__(self):
         return self.descripcion
@@ -40,9 +41,13 @@ class Encuesta(models.Model):
     @property
     def cobertura(self):
         total_preguntas = Persona.objects.count() * self.preguntas.count()
-        #return total_preguntas
-        total_respuestas = Registro.objects.filter(pregunta__in=self.preguntas)
-        return total_preguntas / total_respuestas * 100
+        total_respuestas = Registro.objects.filter(
+            pregunta__in=list(self.preguntas.all()),
+            periodo=Periodo.get_activo()
+        ).count()
+        if total_preguntas == 0:
+            return 100.0
+        return total_respuestas / total_preguntas * 100
 
 
 class Pregunta(models.Model):
@@ -59,9 +64,12 @@ class Periodo(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     personas = models.ManyToManyField('Persona', through='Registro')
+    activo = models.BooleanField(default=False)
 
     def __str__(self):
-        return "%s (%s - %s)" % (self.descripcion, self.fecha_inicio, self.fecha_fin)
+        return "%s (%s - %s) %s" % (
+            self.descripcion, self.fecha_inicio, self.fecha_fin, 'activo' if self.activo else ''
+        )
 
     def clean(self):
         if self.fecha_inicio > self.fecha_fin:
@@ -70,10 +78,21 @@ class Periodo(models.Model):
                 'fecha_fin': 'debe ser mayor o igual de la fecha inicial'
             })
 
+    def save(self, *args, **kwargs):
+        if self.activo:
+            if self.pk is None:
+                Periodo.objects.update(activo=False)
+            else:
+                Periodo.objects.exclude(pk=self.pk).update(activo=False)
+        super(Periodo, self).save(*args, **kwargs)
+
     @staticmethod
-    def activo():
-        periodo = Periodo.objects.filter(fecha_inicio__lte=timezone.now(), fecha_fin__gte=timezone.now()).first()
-        return periodo
+    def get_actual():
+        return Periodo.objects.filter(fecha_inicio__lte=timezone.now(), fecha_fin__gte=timezone.now()).first()
+
+    @staticmethod
+    def get_activo():
+        return Periodo.objects.filter(activo=True).first()
 
 
 class Registro(models.Model):

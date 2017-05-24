@@ -14,7 +14,7 @@ class PersonaViewSet(viewsets.ModelViewSet):
 
 class EncuestaViewSet(viewsets.ModelViewSet):
     serializer_class = EncuestaSerializer
-    queryset = Encuesta.objects.all().prefetch_related('preguntas')
+    queryset = Encuesta.objects.filter(periodos__activo=True).all().prefetch_related('preguntas')
 
 
 class PreguntaViewSet(viewsets.ModelViewSet):
@@ -27,8 +27,11 @@ class PeriodoViewSet(viewsets.ModelViewSet):
     queryset = Periodo.objects.all()
 
     def dispatch(self, request, *args, **kwargs):
-        if kwargs.get('pk') == 'current':
-            periodo = Periodo.activo()
+        if kwargs.get('pk') == 'active':
+            periodo = Periodo.get_activo()
+            kwargs['pk'] = -1 if periodo is None else periodo.id
+        elif kwargs.get('pk') == 'current':
+            periodo = Periodo.get_actual()
             kwargs['pk'] = -1 if periodo is None else periodo.id
         return super(PeriodoViewSet, self).dispatch(request, *args, **kwargs)
 
