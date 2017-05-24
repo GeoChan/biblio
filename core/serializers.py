@@ -41,7 +41,7 @@ class EncuestaActivaSerializer(serializers.HyperlinkedModelSerializer):
 class PeriodoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Periodo
-        fields = ('url', 'descripcion', 'fecha_inicio', 'fecha_fin', 'encuestas')
+        fields = ('url', 'descripcion', 'fecha_inicio', 'fecha_fin', 'activo', 'encuestas')
 
     def validate(self, attrs):
         if attrs['fecha_inicio'] > attrs['fecha_fin']:

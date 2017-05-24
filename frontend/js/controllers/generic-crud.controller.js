@@ -15,13 +15,14 @@
         vm.crudTotal = 1;
         vm.crudLimit = 10;
         vm.crudPage = 1;
+        vm.promise = null;
         vm.getCrudData = getCrudData;
 
         getCrudData();
 
         function getCrudData() {
-            $http.get(vm.crudApiUrl + '?page=' + vm.crudPage + '&size=' + vm.crudLimit)
-                .then(complete, failed);
+            vm.promise = $http.get(vm.crudApiUrl + '?page=' + vm.crudPage + '&size=' + vm.crudLimit);
+            vm.promise.then(complete, failed);
 
             function complete(response) {
                 vm.crudData = response.data.results;

@@ -1,6 +1,6 @@
 <biblio-wrapper title="Panel de Control" to-excel="#tabla">
 
-    <md-toolbar class="md-table-toolbar md-default" ng-hide="vm.crudSelected.length">
+    <md-toolbar class="md-table-toolbar md-default">
         <div class="md-toolbar-tools">
             <h2 class="md-title">Persona</h2>
         </div>
@@ -9,7 +9,7 @@
     <div layout="column" flex>
         <!-- exact table from live demo -->
         <md-table-container>
-            <table md-table>
+            <table md-table md-progress="vm.promise">
                 <thead md-head md-order="vm.crudOrder" md-on-reorder="vm.getCrudData">
                 <tr md-row>
                     <th md-column>Código</th>
