@@ -1,6 +1,7 @@
 from core.models import Periodo, Persona, Encuesta, Pregunta, Registro, Categoria, Libro, Busqueda, Prestamo
 from core.serializers import PeriodoSerializer, PersonaSerializer, EncuestaSerializer, RegistroSerializer, \
-    CategoriaSerializer, LibroSerializer, BusquedaSerializer, PrestamoSerializer, UserSerializer, PreguntaSerializer
+    CategoriaSerializer, LibroSerializer, BusquedaSerializer, PrestamoSerializer, UserSerializer, PreguntaSerializer, \
+    EncuestaActivaSerializer
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
@@ -14,6 +15,11 @@ class PersonaViewSet(viewsets.ModelViewSet):
 
 class EncuestaViewSet(viewsets.ModelViewSet):
     serializer_class = EncuestaSerializer
+    queryset = Encuesta.objects.all().prefetch_related('preguntas')
+
+
+class EncuestaActivaViewSet(viewsets.ModelViewSet):
+    serializer_class = EncuestaActivaSerializer
     queryset = Encuesta.objects.filter(periodos__activo=True).all().prefetch_related('preguntas')
 
 
