@@ -1,0 +1,23 @@
+<md-dialog flex>
+    <div class="md-toolbar-tools">
+        <h1>Reporte de Respuestas</h1>
+        <span flex></span>
+        <md-button class="md-icon-button md-primary" ng-click="vm.close()">
+            <md-icon>close</md-icon>
+        </md-button>
+    </div>
+    <md-dialog-content layout-padding>
+        <md-card ng-repeat="pie in vm.data" layout="column" flex>
+            <md-card-header>{{ pie.enunciado }}</md-card-header>
+            <md-card-content>
+                <nvd3 options="vm.options" data="pie.data"></nvd3>
+            </md-card-content>
+        </md-card>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-primary md-raised" ng-click="vm.close()">
+            <md-icon>close</md-icon>
+            Cerrar
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

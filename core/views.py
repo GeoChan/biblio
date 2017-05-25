@@ -44,7 +44,7 @@ class PeriodoViewSet(viewsets.ModelViewSet):
 
 class RegistroViewSet(viewsets.ModelViewSet):
     serializer_class = RegistroSerializer
-    queryset = Registro.objects.all().order_by('pj')
+    queryset = Registro.objects.all().order_by('pk')
 
 
 class CategoriaViewSet(viewsets.ModelViewSet):

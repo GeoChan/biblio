@@ -14,12 +14,18 @@
                 <tr md-row>
                     <th md-column>Descripción</th>
                     <th md-column>Covertura</th>
+                    <th md-column>Gráfico</th>
                 </tr>
                 </thead>
                 <tbody md-body>
                 <tr md-row ng-repeat="data in vm.crudData">
                     <td md-cell>{{ data.descripcion }}</td>
                     <td md-cell width="100"><b>{{ data.cobertura | number:2 }}%</b></td>
+                    <td md-cell width="50">
+                        <md-button class="md-icon-button md-primary" ng-click="vm.launchDialog(vm.config, data.cobertura_respuesta)">
+                            <md-icon>pie_chart</md-icon>
+                        </md-button>
+                    </td>
                 </tr>
                 </tbody>
             </table>

@@ -24,7 +24,11 @@ class Persona(models.Model):
         if periodo is None:
             return 'no hay periodo activo'
         preguntas = Pregunta.objects.filter(encuesta__in=list(periodo.encuestas.all())).all()
-        preguntas_contestadas = Registro.objects.filter(pregunta__in=list(preguntas), persona=self).count()
+        preguntas_contestadas = Registro.objects.filter(
+            pregunta__in=list(preguntas),
+            persona=self,
+            periodo=periodo
+        ).count()
         total_preguntas = len(preguntas)
         if total_preguntas == 0:
             return 100.0
@@ -39,7 +43,11 @@ class Persona(models.Model):
         resultado = []
         for encuesta in encuestas:
             preguntas = Pregunta.objects.filter(encuesta=encuesta).all()
-            preguntas_contestadas = Registro.objects.filter(pregunta__in=list(preguntas), persona=self).count()
+            preguntas_contestadas = Registro.objects.filter(
+                pregunta__in=list(preguntas),
+                persona=self,
+                periodo=periodo
+            ).count()
             total_preguntas = len(preguntas)
             if total_preguntas == 0:
                 return 100.0
@@ -70,6 +78,24 @@ class Encuesta(models.Model):
         if total_preguntas == 0:
             return 100.0
         return total_respuestas / total_preguntas * 100
+
+    @property
+    def cobertura_respuesta(self):
+        respuestas = Registro.objects.filter(pregunta__in=list(self.preguntas.all()), periodo=Periodo.get_activo())
+        resultado = {}
+        for pregunta in self.preguntas.all().order_by('pk'):
+            resultado[pregunta.id] = {
+                'enunciado': pregunta.enunciado,
+                'escala': {clave: 0 for _, clave in ESCALAS}
+            }
+        for respuesta in respuestas:
+            key = ''
+            for value, escala in ESCALAS:
+                if value == respuesta.escala:
+                    key = escala
+            if key in resultado[pregunta.id]['escala']:
+                resultado[respuesta.pregunta_id]['escala'][key] += 1
+        return [value for _, value in resultado.items()]
 
 
 class Pregunta(models.Model):
