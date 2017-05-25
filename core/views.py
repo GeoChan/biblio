@@ -10,17 +10,17 @@ from rest_framework import mixins
 
 class PersonaViewSet(viewsets.ModelViewSet):
     serializer_class = PersonaSerializer
-    queryset = Persona.objects.all()
+    queryset = Persona.objects.all().order_by('pk')
 
 
 class EncuestaViewSet(viewsets.ModelViewSet):
     serializer_class = EncuestaSerializer
-    queryset = Encuesta.objects.all().prefetch_related('preguntas')
+    queryset = Encuesta.objects.all().prefetch_related('preguntas').order_by('pk')
 
 
 class EncuestaActivaViewSet(viewsets.ModelViewSet):
     serializer_class = EncuestaActivaSerializer
-    queryset = Encuesta.objects.filter(periodos__activo=True).all().prefetch_related('preguntas')
+    queryset = Encuesta.objects.filter(periodos__activo=True).all().prefetch_related('preguntas').order_by('pk')
 
 
 class PreguntaViewSet(viewsets.ModelViewSet):
@@ -30,7 +30,7 @@ class PreguntaViewSet(viewsets.ModelViewSet):
 
 class PeriodoViewSet(viewsets.ModelViewSet):
     serializer_class = PeriodoSerializer
-    queryset = Periodo.objects.all()
+    queryset = Periodo.objects.all().order_by('pk')
 
     def dispatch(self, request, *args, **kwargs):
         if kwargs.get('pk') == 'active':
@@ -44,32 +44,32 @@ class PeriodoViewSet(viewsets.ModelViewSet):
 
 class RegistroViewSet(viewsets.ModelViewSet):
     serializer_class = RegistroSerializer
-    queryset = Registro.objects.all()
+    queryset = Registro.objects.all().order_by('pj')
 
 
 class CategoriaViewSet(viewsets.ModelViewSet):
     serializer_class = CategoriaSerializer
-    queryset = Categoria.objects.all()
+    queryset = Categoria.objects.all().order_by('pk')
 
 
 class LibroViewSet(viewsets.ModelViewSet):
     serializer_class = LibroSerializer
-    queryset = Libro.objects.all()
+    queryset = Libro.objects.all().order_by('pk')
 
 
 class BusquedaViewSet(viewsets.ModelViewSet):
     serializer_class = BusquedaSerializer
-    queryset = Busqueda.objects.all()
+    queryset = Busqueda.objects.all().order_by('pk')
 
 
 class PrestamoViewSet(viewsets.ModelViewSet):
     serializer_class = PrestamoSerializer
-    queryset = Prestamo.objects.all()
+    queryset = Prestamo.objects.all().order_by('pk')
 
 
 class UserViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     serializer_class = UserSerializer
-    queryset = User.objects.all()
+    queryset = User.objects.all().order_by('pk')
 
     def dispatch(self, request, *args, **kwargs):
         if kwargs.get('pk') == 'current' and request.user:

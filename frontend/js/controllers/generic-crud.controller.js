@@ -5,10 +5,10 @@
         .module('biblio')
         .controller('GenericCrudController', GenericCrudController);
 
-    GenericCrudController.$inject = ['vm', '$http'];
+    GenericCrudController.$inject = ['vm', '$http', '$mdDialog'];
 
     /* @ngInject */
-    function GenericCrudController(vm, $http) {
+    function GenericCrudController(vm, $http, $mdDialog) {
         vm.crudApiUrl = vm.crudApiUrl || '';
         vm.crudData = [];
         vm.crudOrder = '';
@@ -23,6 +23,7 @@
         function getCrudData() {
             vm.promise = $http.get(vm.crudApiUrl + '?page=' + vm.crudPage + '&size=' + vm.crudLimit);
             vm.promise.then(complete, failed);
+            vm.launchDialog = launchDialog;
 
             function complete(response) {
                 vm.crudData = response.data.results;
@@ -30,6 +31,24 @@
             }
 
             function failed(response) {
+            }
+
+            function launchDialog(config) {
+                var template = '<md-dialog flex>' +
+                    (config.component || '(No Template)') +
+                    '</md-dialog>';
+                var dialog = {
+                    template: template,
+                    clickOutsideToClose: true,
+                    resolve: {
+                        dialogData: config.provider || empty
+                    }
+                };
+                var promise = $mdDialog.show(dialog);
+                promise.then(config.complete || empty, config.failed || empty);
+                function empty() {
+                    return undefined;
+                }
             }
         }
     }

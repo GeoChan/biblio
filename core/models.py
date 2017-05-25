@@ -23,9 +23,9 @@ class Persona(models.Model):
         periodo = Periodo.get_activo()
         if periodo is None:
             return 'no hay encueesta activa'
-        preguntas = periodo.encuestas.get().preguntas
-        preguntas_contestadas = Registro.objects.filter(pregunta__in=list(preguntas.all()), persona=self).count()
-        total_preguntas = preguntas.count()
+        preguntas = Pregunta.objects.filter(encuesta__in=list(periodo.encuestas.all())).all()
+        preguntas_contestadas = Registro.objects.filter(pregunta__in=list(preguntas), persona=self).count()
+        total_preguntas = len(preguntas)
         if total_preguntas == 0:
             return 100.0
         return preguntas_contestadas / total_preguntas * 100.0

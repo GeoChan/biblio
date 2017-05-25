@@ -21,6 +21,12 @@
     function CrudPersonaController($controller) {
         var vm = this;
         vm.crudApiUrl = '/api/persona';
+        vm.config = {
+            component: '<graph-persona></graph-persona>',
+            provider: function(){
+                return 'hola';
+            }
+        };
         $controller('GenericCrudController', {vm: vm});
     }
 

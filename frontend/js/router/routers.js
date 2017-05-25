@@ -10,7 +10,7 @@
             var encuesta = {
                 name: 'encuesta',
                 url: '/encuesta',
-                template: '<crud-encuesta></crud-encuesta>'
+                template: '<graph-persona></graph-persona>'
             };
             var periodo = {
                 name: 'periodo',

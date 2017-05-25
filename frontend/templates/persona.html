@@ -15,13 +15,19 @@
                     <th md-column>Código</th>
                     <th md-column>Email</th>
                     <th md-column>Completado</th>
+                    <th md-column>Gráfico</th>
                 </tr>
                 </thead>
                 <tbody md-body>
                 <tr md-row ng-repeat="data in vm.crudData">
                     <td md-cell>{{ data.codigo }}</td>
                     <td md-cell>{{ data.email }}</td>
-                    <td md-cell width="100"><b>{{ data.completado | number:2 }}%</b></td>
+                    <td md-cell width="50"><b>{{ data.completado | number:2 }}%</b></td>
+                    <td md-cell width="50">
+                        <md-button class="md-icon-button md-primary" ng-click="vm.launchDialog(vm.config)">
+                            <md-icon>pie_chart</md-icon>
+                        </md-button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
