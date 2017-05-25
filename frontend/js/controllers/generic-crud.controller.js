@@ -33,19 +33,18 @@
             function failed(response) {
             }
 
-            function launchDialog(config) {
-                var template = '<md-dialog flex>' +
-                    (config.component || '(No Template)') +
-                    '</md-dialog>';
-                var dialog = {
-                    template: template,
-                    clickOutsideToClose: true,
-                    resolve: {
-                        dialogData: config.provider || empty
-                    }
+            function launchDialog(config, data) {
+                config.clickOutsideToClose = true;
+                var dialog_complete = config.complete || empty;
+                var dialog_failed = config.failed || empty;
+                config.failed = config.complete = undefined;
+                config.fullscreen = true;
+                config.escToClose = true;
+                config.locals = {
+                    collectedData: data
                 };
-                var promise = $mdDialog.show(dialog);
-                promise.then(config.complete || empty, config.failed || empty);
+                var promise = $mdDialog.show(config);
+                promise.then(dialog_complete, dialog_failed);
                 function empty() {
                     return undefined;
                 }

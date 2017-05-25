@@ -24,7 +24,7 @@
                     <td md-cell>{{ data.email }}</td>
                     <td md-cell width="50"><b>{{ data.completado | number:2 }}%</b></td>
                     <td md-cell width="50">
-                        <md-button class="md-icon-button md-primary" ng-click="vm.launchDialog(vm.config)">
+                        <md-button class="md-icon-button md-primary" ng-click="vm.launchDialog(vm.config, data.completado_encuesta)">
                             <md-icon>pie_chart</md-icon>
                         </md-button>
                     </td>

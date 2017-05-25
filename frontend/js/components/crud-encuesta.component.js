@@ -8,9 +8,8 @@
     function crudEncuesta() {
         var component = {
             templateUrl: 'templates/encuesta.html',
-            bindings: {},
             controller: CrudEncuestaController,
-            controllerAs: 'vm',
+            controllerAs: 'vm'
         };
         return component;
     }
@@ -23,6 +22,5 @@
         vm.crudApiUrl = '/api/encuesta_activa';
         $controller('GenericCrudController', {vm: vm});
     }
-
 })();
 

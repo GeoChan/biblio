@@ -22,13 +22,35 @@ class Persona(models.Model):
     def completado(self):
         periodo = Periodo.get_activo()
         if periodo is None:
-            return 'no hay encueesta activa'
+            return 'no hay periodo activo'
         preguntas = Pregunta.objects.filter(encuesta__in=list(periodo.encuestas.all())).all()
         preguntas_contestadas = Registro.objects.filter(pregunta__in=list(preguntas), persona=self).count()
         total_preguntas = len(preguntas)
         if total_preguntas == 0:
             return 100.0
         return preguntas_contestadas / total_preguntas * 100.0
+
+    @property
+    def completado_encuesta(self):
+        periodo = Periodo.get_activo()
+        if periodo is None:
+            return 'no ha periodo activo'
+        encuestas = periodo.encuestas.all()
+        resultado = []
+        for encuesta in encuestas:
+            preguntas = Pregunta.objects.filter(encuesta=encuesta).all()
+            preguntas_contestadas = Registro.objects.filter(pregunta__in=list(preguntas), persona=self).count()
+            total_preguntas = len(preguntas)
+            if total_preguntas == 0:
+                return 100.0
+            porcentaje = preguntas_contestadas / total_preguntas * 100.0
+            resultado.append({
+                'descripcion': encuesta.descripcion,
+                'porcentaje': porcentaje,
+                'total_preguntas': total_preguntas,
+                'preguntas_contestadas': preguntas_contestadas
+            })
+        return resultado
 
 
 class Encuesta(models.Model):

@@ -8,9 +8,8 @@
     function crudPeriodo() {
         var component = {
             templateUrl: 'templates/periodo.html',
-            bindings: {},
             controller: CrudPeriodoController,
-            controllerAs: 'vm',
+            controllerAs: 'vm'
         };
         return component;
     }
@@ -23,6 +22,5 @@
         vm.crudApiUrl = '/api/periodo';
         $controller('GenericCrudController', {vm: vm});
     }
-
 })();
 
