@@ -1,14 +1,13 @@
 body {
-  overflow: hidden;
-  background-color: #EEEEEE;
+    overflow: hidden;
+    background-color: #EEEEEE;
 }
 
 md-whiteframe {
-  background: #fff;
+    background: #fff;
 }
 
 #content {
-  padding: 5px;
-  overflow: auto;
+    padding: 5px;
+    overflow: auto;
 }
-
