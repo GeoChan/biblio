@@ -4,6 +4,7 @@
             'ui.router',
             'ngMaterial',
             'md.data.table',
-            'nvd3'
+            'nvd3',
+            'ng-fusioncharts'
         ]);
 })();
