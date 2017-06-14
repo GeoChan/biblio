@@ -82,15 +82,18 @@
                 }, {
                     name: 'Reportes',
                     expand: false,
-                    actions: [{
-                        name: 'Encuestados',
-                        icon: 'trending_up',
-                        link: 'Action 4'
-                    }, {
-                        name: 'Resultados',
-                        icon: 'pie_chart',
-                        link: 'resultado'
-                    }]
+                    actions: [
+                        /*{
+                            name: 'Encuestados',
+                            icon: 'trending_up',
+                            link: 'Action 4'
+                        },*/
+                        {
+                            name: 'Resultados',
+                            icon: 'pie_chart',
+                            link: 'resultado'
+                        }
+                    ]
                 }]
             },
             content: {
