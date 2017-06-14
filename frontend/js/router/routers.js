@@ -17,8 +17,14 @@
                 url: '/periodo',
                 template: '<crud-periodo></crud-periodo>'
             };
+            var resultado = {
+                name: 'resultado',
+                url: '/resultado',
+                template: '<rept-resultado></rept-resultado>'
+            };
             $stateProvider.state(persona);
             $stateProvider.state(encuesta);
             $stateProvider.state(periodo);
+            $stateProvider.state(resultado);
         });
 })();

@@ -1,0 +1,20 @@
+<biblio-wrapper title="Reportes">
+    <div layout="column" layout-padding>
+        <h1>Reporte de Respuestas negativas:</h1>
+        <fusioncharts height="400"
+                      width="100%"
+                      type="pareto2d"
+                      ng-repeat="datasource in vm.data_si"
+                      datasource="{{ datasource }}" flex align="center">
+        </fusioncharts>
+    </div>
+    <div layout="column" layout-padding>
+        <h1>Reporte de Respuestas positivas:</h1>
+        <fusioncharts height="400"
+                      width="100%"
+                      type="pareto2d"
+                      ng-repeat="datasource in vm.data_no"
+                      datasource="{{ datasource }}" flex align="center">
+        </fusioncharts>
+    </div>
+</biblio-wrapper>

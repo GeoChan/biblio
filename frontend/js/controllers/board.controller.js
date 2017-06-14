@@ -89,7 +89,7 @@
                     }, {
                         name: 'Resultados',
                         icon: 'pie_chart',
-                        link: 'Action 5'
+                        link: 'resultado'
                     }]
                 }]
             },
