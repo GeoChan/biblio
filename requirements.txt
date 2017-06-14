@@ -2,6 +2,7 @@ appdirs==1.4.3
 coreapi==2.3.0
 coreschema==0.0.4
 Django==1.11.1
+django-material==1.0.0
 djangorestframework==3.6.3
 itypes==1.1.0
 Jinja2==2.9.6
