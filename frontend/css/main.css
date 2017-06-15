@@ -18,8 +18,25 @@ md-whiteframe {
 
 .registro {
     background: white;
+    margin-bottom: 20px;
 }
 
 .registro-back {
     background: #aaaaaa;
+}
+
+.gracias{
+    color: green;
+}
+
+h4 {
+    margin: 0;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+li:last-child {
+    margin-bottom: 0;
 }

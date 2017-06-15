@@ -9,7 +9,7 @@ from django.shortcuts import redirect, render
 
 class PersonaViewSet(viewsets.ModelViewSet):
     serializer_class = PersonaSerializer
-    queryset = Persona.objects.all().order_by('pk').prefetch_related('preguntas')
+    queryset = Persona.objects.all().order_by('pk')
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def dispatch(self, request, *args, **kwargs):
@@ -22,11 +22,13 @@ class PersonaViewSet(viewsets.ModelViewSet):
 class EncuestaViewSet(viewsets.ModelViewSet):
     serializer_class = EncuestaSerializer
     queryset = Encuesta.objects.all().prefetch_related('preguntas').order_by('pk')
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class EncuestaActivaViewSet(viewsets.ModelViewSet):
     serializer_class = EncuestaActivaSerializer
     queryset = Encuesta.objects.filter(periodos__activo=True).all().prefetch_related('preguntas').order_by('pk')
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class PreguntaViewSet(viewsets.ModelViewSet):

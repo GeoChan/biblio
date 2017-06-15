@@ -1,6 +1,7 @@
 <md-content layout-padding flex class="registro-back">
     <div layout layout-align="center">
-        <div flex="100" flex-gt-sm="80" flex-gt-md="60" class="md-whiteframe-z2 registro" layout-padding ng-show="!vm.encuesta_activa">
+        <div flex="100" flex-gt-sm="80" flex-gt-md="60" class="md-whiteframe-z2 registro" layout-padding
+             ng-show="!vm.encuesta_activa">
             <form ng-submit="vm.encuestar()">
                 <div layout="row" layout-align="center">
                     <md-input-container flex="30" class="md-primary">
@@ -18,8 +19,25 @@
                 </div>
             </form>
         </div>
-        <div flex="100" flex-gt-sm="80" flex-gt-md="60" class="md-whiteframe-z2 registro" layout-padding ng-show="vm.encuesta_activa">
-            hola mundo
+        <div flex="100" flex-gt-sm="80" flex-gt-md="60" ng-show="vm.encuesta_activa" layout="column">
+            <div class="md-whiteframe-z2 registro" layout-padding>
+                <h4>Código de estudiante: {{ vm.persona.codigo }}</h4>
+            </div>
+            <div class="md-whiteframe-z2 registro" layout-padding ng-repeat="encuesta in vm.encuesta_activa">
+                <h4>{{ encuesta.descripcion }}</h4>
+                <div>
+                    <ol>
+                        <li ng-repeat="pregunta in encuesta.preguntas">
+                            <b>{{ pregunta.enunciado }}</b>
+                            <br/>
+                            <biblio-registro-pregunta pregunta="pregunta.url"
+                                                      persona="vm.persona"
+                                                      periodo="vm.periodo_activo.url">
+                            </biblio-registro-pregunta>
+                        </li>
+                    </ol>
+                </div>
+            </div>
         </div>
     </div>
 </md-content>

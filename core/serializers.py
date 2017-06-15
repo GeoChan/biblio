@@ -4,16 +4,29 @@ from django.contrib.auth.models import User
 from rest_framework.exceptions import ValidationError
 
 
-class PersonaSerializer(serializers.HyperlinkedModelSerializer):
+class RegistroPersonaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Persona
-        fields = ('url', 'codigo', 'email', 'preguntas', 'completado', 'completado_encuesta')
+        model = Registro
+        fields = ('pregunta', 'periodo')
 
 
 class PreguntaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Pregunta
         fields = ('url', 'enunciado', 'encuesta')
+
+
+class PersonaSerializer(serializers.HyperlinkedModelSerializer):
+    registros = serializers.SerializerMethodField()
+
+    def get_registros(self, persona):
+        queryset = Registro.objects.filter(persona=persona, periodo__activo=True)
+        serializer = RegistroPersonaSerializer(instance=queryset, many=True, context=self.context)
+        return serializer.data
+
+    class Meta:
+        model = Persona
+        fields = ('url', 'codigo', 'email', 'registros', 'completado', 'completado_encuesta')
 
 
 class PreguntaRelatedSerializer(serializers.HyperlinkedModelSerializer):
@@ -31,9 +44,11 @@ class EncuestaSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class EncuestaActivaSerializer(serializers.HyperlinkedModelSerializer):
+    preguntas = PreguntaRelatedSerializer(many=True, read_only=True)
+
     class Meta:
         model = Encuesta
-        fields = ('url', 'descripcion', 'cobertura', 'cobertura_respuesta', 'periodos')
+        fields = ('url', 'descripcion', 'preguntas', 'cobertura', 'cobertura_respuesta', 'periodos')
 
 
 class PeriodoSerializer(serializers.HyperlinkedModelSerializer):
