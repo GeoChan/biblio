@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+
+{% block sidenav_items %}
+    <li>
+        <a class="collapsible-header" href="/board/index.html#/persona">
+            <i class="material-icons">pie_chart</i>
+            Panel de Control
+        </a>
+    </li>
+    {{ block.super }}
+{% endblock %}
+

@@ -35,34 +35,6 @@
                 email: 'admin@biblio.com',
                 icon: 'face'
             },
-            toolbar: {
-                buttons: [{
-                    name: 'Button 1',
-                    icon: 'add',
-                    link: 'Button 1'
-                }],
-                menus: [{
-                    name: 'Menu 1',
-                    icon: 'message',
-                    width: '4',
-                    actions: [{
-                        name: 'Action 1',
-                        message: 'Action 1',
-                        completed: true,
-                        error: true
-                    }, {
-                        name: 'Action 2',
-                        message: 'Action 2',
-                        completed: false,
-                        error: false
-                    }, {
-                        name: 'Action 3',
-                        message: 'Action 3',
-                        completed: true,
-                        error: true
-                    }]
-                }]
-            },
             sidenav: {
                 sections: [{
                     name: 'Panel de Control',

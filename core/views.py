@@ -39,6 +39,7 @@ class PreguntaViewSet(viewsets.ModelViewSet):
 class PeriodoViewSet(viewsets.ModelViewSet):
     serializer_class = PeriodoSerializer
     queryset = Periodo.objects.all().order_by('pk')
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def dispatch(self, request, *args, **kwargs):
         if kwargs.get('pk') == 'active':

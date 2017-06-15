@@ -12,7 +12,7 @@ ESCALAS = (
 
 class Persona(models.Model):
     codigo = models.CharField(max_length=6, unique=True)
-    email = models.EmailField()
+    email = models.EmailField(null=True, blank=True)
     preguntas = models.ManyToManyField('Pregunta', through='Registro')
 
     def __str__(self):
