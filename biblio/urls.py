@@ -21,7 +21,7 @@ from core.views import home
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('core.urls')),
-    url(r'^', home),
+    url(r'^$', home),
     #url(r'^login$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     #url(r'^logout$', auth_views.logout, {'template_name': 'logout.html'}, name='logout'),
 ]
