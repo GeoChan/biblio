@@ -19,7 +19,7 @@
     /* @ngInject */
     function CrudEncuestaController($controller) {
         var vm = this;
-        vm.crudApiUrl = '/api/encuesta_activa';
+        vm.crudApiUrl = '/api/encuesta_activa/';
         vm.config = {
             templateUrl: 'templates/pie-encuesta.html',
             controller: 'PieEncuesta as vm'

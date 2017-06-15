@@ -3,9 +3,9 @@
         .module('biblio')
         .controller('BoardController', BoardController);
 
-    BoardController.$inject = ['$mdSidenav', '$mdToast', '$state'];
+    BoardController.$inject = ['$mdSidenav', '$mdToast', '$state', '$http'];
 
-    function BoardController($mdSidenav, $mdToast, $state) {
+    function BoardController($mdSidenav, $mdToast, $state, $http) {
         var vm = this;
         vm.toggleSidenav = function (menu) {
             $mdSidenav(menu).toggle();
@@ -27,6 +27,7 @@
             if (idx > -1) list.splice(idx, 1);
             else list.push(item);
         };
+        check();
         vm.data = {
             title: 'Biblioteca',
             user: {
@@ -84,10 +85,10 @@
                     expand: false,
                     actions: [
                         /*{
-                            name: 'Encuestados',
-                            icon: 'trending_up',
-                            link: 'Action 4'
-                        },*/
+                         name: 'Encuestados',
+                         icon: 'trending_up',
+                         link: 'Action 4'
+                         },*/
                         {
                             name: 'Resultados',
                             icon: 'pie_chart',
@@ -125,6 +126,15 @@
                     }]
                 }]
             }
+        };
+        function check() {
+            var promise = $http.get('/api/user/current/')
+            promise.then(function (result) {
+                vm.data.user.name = result.data.username;
+                vm.data.user.email = result.data.email;
+            }, function () {
+                location.href = '/';
+            });
         }
     }
 })();

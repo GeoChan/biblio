@@ -18,7 +18,7 @@
     /* @ngInject */
     function CrudPersonaController($controller) {
         var vm = this;
-        vm.crudApiUrl = '/api/persona';
+        vm.crudApiUrl = '/api/persona/';
         vm.config = {
             templateUrl: 'templates/pie-persona.html',
             controller: 'PiePersona as vm'

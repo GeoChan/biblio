@@ -24,7 +24,7 @@
         init();
 
         function init() {
-            var promise = $http.get('/api/encuesta_activa');
+            var promise = $http.get('/api/encuesta_activa/');
             promise.then(completed, failed);
         }
 

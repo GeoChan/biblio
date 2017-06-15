@@ -11,3 +11,7 @@ md-whiteframe {
     padding: 5px;
     overflow: auto;
 }
+
+.error {
+    color: red
+}

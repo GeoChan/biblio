@@ -19,7 +19,7 @@
     /* @ngInject */
     function CrudPeriodoController($controller) {
         var vm = this;
-        vm.crudApiUrl = '/api/periodo';
+        vm.crudApiUrl = '/api/periodo/';
         $controller('GenericCrudController', {vm: vm});
     }
 })();

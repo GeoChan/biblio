@@ -4,13 +4,19 @@ from core.serializers import PeriodoSerializer, PersonaSerializer, EncuestaSeria
     EncuestaActivaSerializer
 from rest_framework import viewsets
 from django.contrib.auth.models import User
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from rest_framework import mixins
 
 
 class PersonaViewSet(viewsets.ModelViewSet):
     serializer_class = PersonaSerializer
     queryset = Persona.objects.all().order_by('pk')
+
+    def dispatch(self, request, *args, **kwargs):
+        if str(kwargs.get('pk'))[0:1] == 'c':
+            persona = Persona.objects.filter(codigo=kwargs.get('pk')[1:]).first()
+            kwargs['pk'] = -1 if persona is None else persona.id
+        return super(PersonaViewSet, self).dispatch(request, *args, **kwargs)
 
 
 class EncuestaViewSet(viewsets.ModelViewSet):
@@ -78,6 +84,4 @@ class UserViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
 
 def home(request):
-    if request.user.is_authenticated:
-        return redirect('/board/index.html')
-    return redirect('/login')
+    return render(request, 'index.html')
