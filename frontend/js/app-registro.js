@@ -3,7 +3,16 @@
 
     angular
         .module('registro', ['ngMaterial'])
-        .controller('RegistroController', RegistroController);
+        .component('biblioRegistro', biblioRegistro());
+
+    function biblioRegistro() {
+        var component = {
+            templateUrl: '/board/templates/registro.html',
+            controller: RegistroController,
+            controllerAs: 'vm'
+        };
+        return component;
+    }
 
     RegistroController.$inject = ['$http'];
 
@@ -12,13 +21,16 @@
         vm.encuestar = encuestar;
         vm.codigo = null;
         vm.msg_error = '';
+        vm.encuesta_activa = false;
 
         function encuestar() {
+            vm.msg_error = '';
             var promise = $http.get('/api/persona/c' + vm.codigo + '/');
             promise.then(completed, failed);
 
             function completed(result) {
                 console.log(result.data);
+                vm.encuesta_activa = true;
             }
 
             function failed() {

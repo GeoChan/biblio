@@ -7,7 +7,7 @@ from rest_framework.exceptions import ValidationError
 class PersonaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Persona
-        fields = ('url', 'codigo', 'email', 'completado', 'completado_encuesta')
+        fields = ('url', 'codigo', 'email', 'preguntas', 'completado', 'completado_encuesta')
 
 
 class PreguntaSerializer(serializers.HyperlinkedModelSerializer):

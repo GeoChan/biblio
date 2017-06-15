@@ -1,0 +1,25 @@
+<md-content layout-padding flex class="registro-back">
+    <div layout layout-align="center">
+        <div flex="100" flex-gt-sm="80" flex-gt-md="60" class="md-whiteframe-z2 registro" layout-padding ng-show="!vm.encuesta_activa">
+            <form ng-submit="vm.encuestar()">
+                <div layout="row" layout-align="center">
+                    <md-input-container flex="30" class="md-primary">
+                        <label>Código de Estudiante</label>
+                        <input type="text" ng-model="vm.codigo"/>
+                        <div class="error">
+                            {{ vm.msg_error }}
+                        </div>
+                    </md-input-container>
+                </div>
+                <div layout="row" layout-align="center">
+                    <button type="submit" md-button class="md-primary md-raised" flex="30">
+                        Encuestar
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div flex="100" flex-gt-sm="80" flex-gt-md="60" class="md-whiteframe-z2 registro" layout-padding ng-show="vm.encuesta_activa">
+            hola mundo
+        </div>
+    </div>
+</md-content>

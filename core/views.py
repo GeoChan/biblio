@@ -2,15 +2,15 @@ from core.models import Periodo, Persona, Encuesta, Pregunta, Registro, Categori
 from core.serializers import PeriodoSerializer, PersonaSerializer, EncuestaSerializer, RegistroSerializer, \
     CategoriaSerializer, LibroSerializer, BusquedaSerializer, PrestamoSerializer, UserSerializer, PreguntaSerializer, \
     EncuestaActivaSerializer
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins, permissions
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
-from rest_framework import mixins
 
 
 class PersonaViewSet(viewsets.ModelViewSet):
     serializer_class = PersonaSerializer
-    queryset = Persona.objects.all().order_by('pk')
+    queryset = Persona.objects.all().order_by('pk').prefetch_related('preguntas')
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def dispatch(self, request, *args, **kwargs):
         if str(kwargs.get('pk'))[0:1] == 'c':
@@ -51,6 +51,7 @@ class PeriodoViewSet(viewsets.ModelViewSet):
 class RegistroViewSet(viewsets.ModelViewSet):
     serializer_class = RegistroSerializer
     queryset = Registro.objects.all().order_by('pk')
+    permission_classes = (permissions.AllowAny,)
 
 
 class CategoriaViewSet(viewsets.ModelViewSet):

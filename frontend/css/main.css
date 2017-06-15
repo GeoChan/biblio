@@ -15,3 +15,11 @@ md-whiteframe {
 .error {
     color: red
 }
+
+.registro {
+    background: white;
+}
+
+.registro-back {
+    background: #aaaaaa;
+}
