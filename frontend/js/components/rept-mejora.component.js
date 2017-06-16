@@ -41,7 +41,9 @@
                         showpercentvalues: "1",
                         showpercentintooltip: "0",
                         plottooltext: "$datavalue ecuestas $label",
-                        theme: "fint"
+                        theme: "fint",
+                        exportenabled: "1",
+                        exportatclientside: "1"
                     },
                     data: encuesta.reporte_mejora
                 };

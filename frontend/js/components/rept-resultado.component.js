@@ -40,7 +40,9 @@
                         sYAxisname: "Porcentaje Acumulativo",
                         showValues: "0",
                         showXAxisLine: "1",
-                        showLineValues: "1"
+                        showLineValues: "1",
+                        exportenabled: "1",
+                        exportatclientside: "1"
                     },
                     data: []
                 };
@@ -53,7 +55,9 @@
                         sYAxisname: "Porcentaje Acumulativo",
                         showValues: "0",
                         showXAxisLine: "1",
-                        showLineValues: "1"
+                        showLineValues: "1",
+                        exportenabled: "1",
+                        exportatclientside: "1"
                     },
                     data: []
                 };
