@@ -56,14 +56,14 @@
                     name: 'Reportes',
                     expand: false,
                     actions: [
-                        /*{
-                         name: 'Encuestados',
-                         icon: 'trending_up',
-                         link: 'Action 4'
-                         },*/
+                        {
+                            name: 'Mejora',
+                            icon: 'pie_chart',
+                            link: 'mejora'
+                        },
                         {
                             name: 'Resultados',
-                            icon: 'pie_chart',
+                            icon: 'trending_up',
                             link: 'resultado'
                         }
                     ]

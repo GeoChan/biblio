@@ -97,6 +97,30 @@ class Encuesta(models.Model):
                 resultado[respuesta.pregunta_id]['escala'][key] += 1
         return [value for _, value in resultado.items()]
 
+    @property
+    def reporte_mejora(self):
+        registros = Registro.objects.filter(periodo__activo=True).order_by('persona_id')
+        conteo_persona = {}
+        for registro in registros:
+            if registro.persona_id not in conteo_persona:
+                conteo_persona[registro.persona_id] = {'si': 0, 'no': 0}
+            if registro.escala == '1':
+                conteo_persona[registro.persona_id]['si'] += 1
+            else:
+                conteo_persona[registro.persona_id]['no'] += 1
+
+        resultado = {
+            'Mejora': 0,
+            'No mejora': 0
+        }
+        for persona in conteo_persona:
+            conteo = conteo_persona[persona]
+            if conteo['si'] > conteo['no']:
+                resultado['Mejora'] += 1
+            else:
+                resultado['No mejora'] += 1
+        return [{'label': key, 'value': value} for key, value in resultado.items()]
+
 
 class Pregunta(models.Model):
     enunciado = models.CharField(max_length=256)

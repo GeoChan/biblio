@@ -2,7 +2,7 @@ from core.models import Periodo, Persona, Encuesta, Pregunta, Registro, Categori
 from core.serializers import PeriodoSerializer, PersonaSerializer, EncuestaSerializer, RegistroSerializer, \
     CategoriaSerializer, LibroSerializer, BusquedaSerializer, PrestamoSerializer, UserSerializer, PreguntaSerializer, \
     EncuestaActivaSerializer
-from rest_framework import viewsets, mixins, permissions
+from rest_framework import viewsets, mixins, permissions, pagination, generics
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 
@@ -33,7 +33,7 @@ class EncuestaActivaViewSet(viewsets.ModelViewSet):
 
 class PreguntaViewSet(viewsets.ModelViewSet):
     serializer_class = PreguntaSerializer
-    queryset = Pregunta.objects.all()
+    queryset = Pregunta.objects.all().order_by('pk')
 
 
 class PeriodoViewSet(viewsets.ModelViewSet):

@@ -48,7 +48,7 @@ class EncuestaActivaSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Encuesta
-        fields = ('url', 'descripcion', 'preguntas', 'cobertura', 'cobertura_respuesta', 'periodos')
+        fields = ('url', 'descripcion', 'preguntas', 'cobertura', 'cobertura_respuesta', 'periodos', 'reporte_mejora')
 
 
 class PeriodoSerializer(serializers.HyperlinkedModelSerializer):

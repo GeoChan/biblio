@@ -1,0 +1,11 @@
+<biblio-wrapper title="Reportes">
+    <div layout="column" layout-padding>
+        <div ng-repeat="encuesta in vm.encuesta_activa">
+            <fusioncharts height="400"
+                          width="100%"
+                          type="pie3d"
+                          datasource="{{ encuesta }}" flex align="center">
+            </fusioncharts>
+        </div>
+    </div>
+</biblio-wrapper>

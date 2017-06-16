@@ -22,9 +22,15 @@
                 url: '/resultado',
                 template: '<rept-resultado></rept-resultado>'
             };
+            var mejora = {
+                name: 'mejora',
+                url: '/mejora',
+                template: '<rept-mejora></rept-mejora>'
+            };
             $stateProvider.state(persona);
             $stateProvider.state(encuesta);
             $stateProvider.state(periodo);
             $stateProvider.state(resultado);
+            $stateProvider.state(mejora);
         });
 })();
